@@ -1,0 +1,85 @@
+<template>
+
+<section class="mbr-section form3 cid-s7WZVJCPFa mbr-parallax-background" id="form3-1d">
+
+    
+
+    <div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(0, 0, 63);">
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 col-lg-8">
+                <h2 class="align-center pb-2 mbr-fonts-style display-2">
+                    <b>SERMONS</b></h2>
+                <h3 class="mbr-section-subtitle align-center pb-5 mbr-light mbr-fonts-style display-5">Get anointed sermons from God's servant, Rev'd Toluwalogo Agboola</h3>
+            </div>
+        </div>
+
+        <div class="row py-2 justify-content-center">
+            <div class="col-12 col-lg-6  col-md-8">
+                <!-- Formbuilder Form -->
+                <form action="" method="POST" class="mbr-form form-with-styler">
+                    <div class="dragArea row">
+                        <div class="form-group col" data-for="text">
+                            <input type="text" name="query" placeholder="Search sermons here" class="form-control display-7" id="query-search">
+                        </div>
+                       <!-- <div class="col-auto input-group-btn"><button type="submit" class="btn btn-primary display-7"><span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span></button></div>-->
+                    </div>
+                </form>
+                <!-- Formbuilder Form -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features17 cid-s804pMFRjC" id="features17-1f" style="background: #f9f9f9">
+
+    
+    <div class="container-fluid">
+        <div class="media-container-row sermons-display">
+
+            <i style="position: relative; margin-left: calc(50%-30px); color: #eeb000" class="fa fa-3x fa-spinner fa-spin"></i>
+            
+        </div>
+    </div>
+</section>
+
+</template>
+
+
+<script src="assets/countdown/jquery.countdown.min.js"></script>
+<script src="assets/theme/js/script.js"></script>
+
+<script type="text/javascript">
+
+$("#query-search").keyup((e)=>{
+  let query = $("#query-search").val();
+  result = searchArray(sermons, query);
+  if(result.length < 1){
+    $(".sermons-display").html("<p>No sermon found matching your search query</p>");
+  }
+
+  else{
+    $(".sermons-display").empty();
+  
+    for(var i = 0; i < result.length; i++){
+     sermon = '<div class="card p-3 col-12 col-md-6 col-lg-3" tag-type="sermon">'+
+                '<div style="background: #fff; cursor: pointer"'+
+                'onclick="loadSermon(\''+result[i].link+'\')" class="card-wrapper">'+
+                    '<div class="card-img">'+
+                        '<img src="'+result[i].image+'" alt="Sermon Icon" style="height: 250px">'+
+                    '</div>'+
+                    '<div class="card-box" style="padding: 10px;">'+
+                        '<p class="card-title pb-3 mbr-fonts-style display-7"'+ 
+                        'style="text-align: center; height: 50px; overflow: hidden">'+result[i].title+'</p>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';
+    $(".sermons-display").prepend(sermon);
+
+          }
+  }
+
+});
+</script>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+  
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
+<script type="text/javascript">
+
+function getNextDayOfTheWeek(dayName, time = "00:00", excludeToday = false, refDate = new Date()) {
+    const weekDays = ["sun","mon","tue","wed","thu","fri","sat"];
+    const dayOfWeek = weekDays.indexOf(dayName.slice(0,3).toLowerCase());
+
+    var chT = (t) =>{
+      return (new Date(t).getTime());
+    }
+
+    today = new Date();
+
+    if(today.getDay() === dayOfWeek){
+      now = new Date().toISOString().substr(0, 16).replace('T', ' ');
+      ptime = new Date().toISOString().substr(0, 10)+" "+time;
+      if(chT(now) > chT(ptime)){
+          excludeToday = true;
+      }
+      // else{alert(now + "----------"+ ptime)}
+    }
+
+    if (dayOfWeek < 0) return;
+    refDate.setHours(0,0,0,0);
+    refDate.setDate(refDate.getDate() + !!excludeToday + 
+                    (dayOfWeek + 7 - refDate.getDay() - !!excludeToday) % 7);
+
+    return refDate.getFullYear()+"/"+("0" + (refDate.getMonth() + 1)).slice(-2) +"/"+ ("0" +(refDate.getDate())).slice(-2)+" "+ time;
+}
+
+function closestTime(arr){
+  closest = getNextDayOfTheWeek(arr[0].day, arr[0].time);
+  for(var i = 1; i < arr.length; i++){
+    elem = getNextDayOfTheWeek(arr[i].day, arr[i].time);
+    el = (new Date(elem)).getTime();
+    ol = (new Date(closest)).getTime();
+    if(el < ol)
+      closest = elem;
+  }
+  return closest;
+}
+
+let days = [
+    {
+        day: "Sunday", 
+        time: "15:00"
+    }, 
+    {
+        day:"Tuesday",
+        time: "16:00"
+    }, 
+];
+
+document.write("Closest date: "+ closestTime(days));
+
+
+
+</script>
